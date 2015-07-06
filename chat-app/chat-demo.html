@@ -1,0 +1,24 @@
+<body>
+  <div class="container">
+    <header>
+      <h1>Chat app</h1>
+      {{> loginButtons}}
+    </header>
+    <ul>
+      {{#each recentMessages}}
+        <li>
+          <div class="username">{{username}}</div>
+          <div class="message">{{text}}</div>
+        </li>
+      {{/each}}
+    </ul>
+    <footer>
+      {{#if currentUser}}
+        <form class="new-message">
+          <input type="text" name="text" placeholder="Add a message" />
+        </form>
+      {{/if}}
+    </footer>
+  </div>
+</body>
+

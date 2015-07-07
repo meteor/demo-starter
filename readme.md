@@ -25,5 +25,5 @@ Many people don't realize that a live coding demo takes at least as much prepara
 
 *This chat app is for demo purposes only!*
 
-* For the sake of brevity, this app leaves the insecure package in.
+* For the sake of brevity, this app leaves the insecure package in. This saves a few lines of code and simplifies the app by allowing us to run `Messages.insert()` without explicitly allowing it. If you want to demo adding real security, move the `Messages.insert` statement to a Meteor method, call that method from the submit event, and remove insecure (see the Meteor tutorial for [an example of this](https://github.com/meteor/simple-todos/blob/master/simple-todos.js)).
 * The app only shows the last 5 messages. This is purely so that we can simulate chat app formatting without doing the real work of having a scrollable chat window that always shows the last message.

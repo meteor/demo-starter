@@ -24,7 +24,7 @@ if (Meteor.isClient) {
       Messages.insert({
         text: text,
         createdAt: new Date(),
-        username: Meteor.user().username
+        username: "anonymous"
       });
 
       event.target.text.value = "";
@@ -32,7 +32,7 @@ if (Meteor.isClient) {
     }
   });
 
-  Accounts.ui.config({
-    passwordSignupFields: "USERNAME_ONLY"
-  });
+  // Accounts.ui.config({
+  //   passwordSignupFields: "USERNAME_ONLY"
+  // });
 }

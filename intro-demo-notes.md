@@ -84,10 +84,8 @@ Show text editor (replace terminal)
 
 * I can call minimongo directly from the browser console...
 * And look, it's already in the DOM! What happened here?
-	* We inserted in minimongo
-	* It synchronized to the master database on the server
-	* The server relayed the change back via the subscription
-	* Meteor's Blazer (the view layer), detected the change and rerendered the DOM based on our template.
+	* We inserted it in the database
+	* The change triggered a rerendering of the DOM using Meteor's Blaze (the view layer).
 	* This ability to rerun and rerender is called reactivity, and it's built into Meteor all the way to the server
 * We can also do this from the mongo console. The meteor tool will help me open the console.
 
@@ -185,9 +183,15 @@ surround <form> element:
 * meteor gives you a free server to demo your apps and share with others
 * It will work great for small apps, and it's free forever.
 * they will also have a pro version of deploy called galaxy. this is how they will make money, but all this is doing is creating a node app. You can get that bundled app and run it on any server that supports node.js
-* OK, it's done. If you go here, you can give it try! 
+* OK, it's done. If you go to this url, you can give it try! 
  
 (go there and leave it up so people can play)
+
+If you prefer to deploy your own code, you can ask the Meteor tool to bundle it up for you
+
+    meteor bundle chat-app
+
+You can see that Meteor gives you instructions on how to use the tarball it creates.
 
 ## Mobile
 * I wish I could sell this app on the app store or Google play

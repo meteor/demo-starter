@@ -84,9 +84,9 @@ Show text editor (replace terminal)
 
 * I can call minimongo directly from the browser console...
 * And look, it's already in the DOM! What happened here?
-	* We inserted it in the database
-	* The change triggered a rerendering of the DOM using Meteor's Blaze (the view layer).
-	* This ability to rerun and rerender is called reactivity, and it's built into Meteor all the way to the server
+	* When inserted it in minimongo, the change triggered a rerendering of the DOM using Blaze, Meteor's view layer.
+	* This ability to rerun and rerender is called reactivity, and it's built into Meteor all the way to the server. 
+    * The insert was also sent separately to the server, which will notify any clients subscribed to the messages publication.
 * We can also do this from the mongo console. The meteor tool will help me open the console.
 
 Go to *terminal*. new tab

@@ -10,7 +10,23 @@ if (Meteor.isServer) {
 if (Meteor.isClient) {
   // This code only runs on the client
   Meteor.subscribe("messages");
+}
 
+Meteor.methods({
+  sendMessage: function (message) {
+    // if (! Meteor.userId()) {
+    //   throw new Meteor.Error("not-authorized");
+    // }
+
+    Messages.insert({
+      text: message,
+      createdAt: new Date(),
+      username: "anonymous"
+    });
+  }
+});
+
+if (Meteor.isClient) {
   Template.body.helpers({
     recentMessages: function () {
       return Messages.find({}, {sort: {createdAt: 1}});
@@ -21,11 +37,7 @@ if (Meteor.isClient) {
     "submit .new-message": function (event) {
       var text = event.target.text.value;
 
-      Messages.insert({
-        text: text,
-        createdAt: new Date(),
-        username: "anonymous"
-      });
+      Meteor.call('sendMessage', text);
 
       event.target.text.value = "";
       return false;
@@ -36,3 +48,4 @@ if (Meteor.isClient) {
   //   passwordSignupFields: "USERNAME_ONLY"
   // });
 }
+

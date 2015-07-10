@@ -5,7 +5,7 @@ This is a demo that is included for use in the Meteor introduction from the [Met
 ## Support Materials
 
 * The [demo notes](intro-demo-notes.md) give a detailed outline of how to set up the demo, how to walk through the code, and what features you may want to emphasize.
-* The [copy/paste cheat sheet](demo-copy-paste.md) gives you a document with text you can copy and paste into the console to save time and minimize errors on a few of the longer commands. We recommend typing the other changes, but feel free to customize this to your style.
+* The [copy/paste cheat sheet](demo-copy-paste.md) gives you a document with text you can copy and paste into the console to save time and minimize errors. It may also serve as a shorthand reminder during a live demo. We recommend typing when you can, but feel free to customize this to your style.
 * The chat-app directory contains the code used in the demo (missing things that you will add as you work through it)
 * There is a [video of the intro talk with this demo]() that you can watch to see a run-through
 
@@ -25,5 +25,4 @@ Many people don't realize that a live coding demo takes at least as much prepara
 
 *This chat app is for demo purposes only!*
 
-* For the sake of brevity, this app leaves the insecure package in. This saves a few lines of code and simplifies the app by allowing us to run `Messages.insert()` without explicitly allowing it. If you want to demo adding real security, move the `Messages.insert` statement to a Meteor method, call that method from the submit event, and remove insecure (see the Meteor tutorial for [an example of this](https://github.com/meteor/simple-todos/blob/master/simple-todos.js)).
-* The app only shows the last 5 messages. This is purely so that we can simulate chat app formatting without doing the real work of having a scrollable chat window that always shows the last message.
+* The app only shows the last 5 messages. This is purely so that we can simulate chat app formatting without doing the real work of having a scrollable chat window that always shows the last message, but it will not display well on large screens.

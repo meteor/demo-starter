@@ -5,12 +5,12 @@
  * terminal on left, blank (tab for chat ready, blank - delete any old app)
  * blank tab for meteor create (delete old version)
  * tab on right in demo code directory - reset app and repo:
-		* `meteor reset` 
-		* `git reset --hard HEAD` 
-		* clear terminal (cmd-k)
+    * `meteor reset`
+    * `git reset --hard HEAD`
+    * clear terminal (cmd-k)
  * underneath, have your text editor with the chat js & html files open in tabs.
  * browser on right at https://www.meteor.com/install
-		* 2nd tab empty but with console showing
+    * 2nd tab empty but with console showing
 
 ##Demo
 
@@ -26,8 +26,8 @@ ctrl-c
 
     meteor create demo
     cd demo
-	ls
-	
+    ls
+
 * I want to move to a more interesting app where I've changed those files (go to chat tab). 
 * When I type meteor, it will start a development server for me
 * It will tell me to go to localhost:3000
@@ -36,15 +36,14 @@ ctrl-c
 
     meteor
 
-
 open in browser
 Show text editor (replace terminal)
 
 ##html
 
-	* There's our site. You can see that the html on the left mirrors the app on the right.
-	* We start with a header element. It's looking pretty empty. Let's add an h1
-	 
+* There's our site. You can see that the html on the left mirrors the app on the right.
+* We start with a header element. It's looking pretty empty. Let's add an h1
+
     <h1>Chat App</h1>
 
 (save)
@@ -53,10 +52,9 @@ Show text editor (replace terminal)
 * (skip the middle)
 * form in footer - input where we'll add messages
 * in the middle is this place where messages will go.
-	* We are using handlebars syntax
-	* We will iterate over all the messages using the each helper, working on a list of recentMessages that will be provided by the javascript.
-	* This will be connected via the database
-	
+    * We are using handlebars syntax
+    * We will iterate over all the messages using the each helper, working on a list of recentMessages that will be provided by the javascript.
+    * This will be connected via the database
 
 ## js code
 
@@ -65,16 +63,16 @@ Show text editor (replace terminal)
     Messages = new Mongo.Collection('msgs');
 
 * runs on both
-	* server: mongo DB collection on your production database
-	* client: minimongo collection (subset of the server, synced by Meteor)
-	* minimongo uses the same api as the production version of Mongo, so you can use the same commands on the client or the server
+    * server: mongo DB collection on your production database
+    * client: minimongo collection (subset of the server, synced by Meteor)
+    * minimongo uses the same api as the production version of Mongo, so you can use the same commands on the client or the server
 * server publish "messages":  
-	* like a REST endpoint, except it's live, meaning changes that affect the query will be pushed down to the client in realtime
-	* query: five most recent messages (only 5 to keep the app simple)
+    * like a REST endpoint, except it's live, meaning changes that affect the query will be pushed down to the client in realtime
+    * query: five most recent messages (only 5 to keep the app simple)
 * client subscribe "messages" - delivers the publication (only 5 on client, no matter how many are there on the server)
 * next, here's the recentMessages helper we saw in the html. It will provide the list of messages to be rendered, and it will rerun if that data changes
-	* Again, we are using standard MongoDB syntax, althought this will be executed on the client.
-	* On the server, we used reverse chronological order to get the most recent messages, but here we'll re-order them into forward chronological order
+    * Again, we are using standard MongoDB syntax, althought this will be executed on the client.
+    * On the server, we used reverse chronological order to get the most recent messages, but here we'll re-order them into forward chronological order
 
 ## Show full stack DB connectivity
 * So that actually gives us everything we need to add messages to the app.
@@ -84,8 +82,8 @@ Show text editor (replace terminal)
 
 * I can call minimongo directly from the browser console...
 * And look, it's already in the DOM! What happened here?
-	* When inserted it in minimongo, the change triggered a rerendering of the DOM using Blaze, Meteor's view layer.
-	* This ability to rerun and rerender is called reactivity, and it's built into Meteor all the way to the server. 
+    * When inserted it in minimongo, the change triggered a rerendering of the DOM using Blaze, Meteor's view layer.
+    * This ability to rerun and rerender is called reactivity, and it's built into Meteor all the way to the server.
     * The insert was also sent separately to the server, which will notify any clients subscribed to the messages publication.
 * We can also do this from the mongo console. The meteor tool will help me open the console.
 
@@ -96,7 +94,7 @@ Go to *terminal*. new tab
 
 * This insert is completely independent of Meteor, but Meteor saw it
 * Meteor sees anything added to mongo - integration point for other apps that use Mongo
- 
+
 ## DB connectivity in js code
 
 * So let's look back at the javascript.
@@ -104,18 +102,19 @@ Go to *terminal*. new tab
 
 *in app*
 
-		hello from the app
-		
+    hello from the app
+
 * And that's all the code. But check this out, if I open another broswer and point it to localhost:3000, it will also update.
 
-		hello again
-		
-		(from other app)
-		hello from other app
-		
+    hello again
+    
+    (from other app)
+    hello from other app
+
 * So in fact, we basically already have a working chat app!
 
 ## Add accounts support
+
 * But there's still one thing missing - all of these are being logged as anonymous. So let's add an accounts system.
 * I'm going to exit the mongo shell and use the Meteor tool to add some packages
 
@@ -124,9 +123,9 @@ Go to *terminal*. new tab
     meteor add accounts-ui accounts-password accounts-facebook
 
 * this gives us
-	* the meteor account system
-	* standalone password-based authentication
-	* and oauth-based authentication
+    * the meteor account system
+    * standalone password-based authentication
+    * and oauth-based authentication
 * Meteor packages can add to the client and the server, so they can coordinate adding ui elements with the server elements that are needed to make them work
 
 ## Update app to use acconts
@@ -137,7 +136,7 @@ Go to *terminal*. new tab
 Add
 
     {{loginButtons}}
-    
+
 (save)
 
 * Here it is! (leave it open)
@@ -150,24 +149,28 @@ uncomment the `Accounts.config` code (hot code push changes email to username)
 
 update "anonymous" to 
 
-		Meteor.user().username
-	
-* Finally, let's disable anonymous messages by hiding the input element if someone's not logged in
+        Meteor.user().username
+
+* and we want to prevent unauthenticated users from posting messages.
+
+uncomment the "not authorized" code just above
+demonstration in the console (up arrow for the command) and in the app.
+
+* Finally, let's since unauthenticated users can't send messages, let's hide the input element if someone's not logged in.
 
 *html*
 surround <form> element:
 
     {{#if currentUser}}
-    	(existing form)
+        (existing form)
     {{/if}}
-    
+
 * This is a handlebars `if` statement and will only render if currentUser is truthy. currentUser will return the user ID or a falsy value.
 * When we hit save, you'll see the input disappear
 * So, that's all the functionality that we need.
 
 ## Demo working app
 (create accounts and show messages both ways - note reactive changes based on login status)
-
 
 ## Deploy
 
@@ -184,7 +187,7 @@ surround <form> element:
 * It will work great for small apps, and it's free forever.
 * they will also have a pro version of deploy called galaxy. this is how they will make money, but all this is doing is creating a node app. You can get that bundled app and run it on any server that supports node.js
 * OK, it's done. If you go to this url, you can give it try! 
- 
+
 (go there and leave it up so people can play)
 
 If you prefer to deploy your own code, you can ask the Meteor tool to bundle it up for you
@@ -204,7 +207,6 @@ You can see that Meteor gives you instructions on how to use the tarball it crea
 * Now Meteor is using Cordova (phoneGap)
 * there are cross--platform packages like camera that will allow you to use the phone's sensors.
 * we can run it in the ios simulator by typing
-
 
     meteor run ios
       (or)

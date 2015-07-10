@@ -16,7 +16,7 @@ ls
 **browser console**
 
 ```
-Messages.insert({text: 'hello from browser', createdAt: new Date, username: 'browser console'})
+Meteor.call('sendMessage', 'hello from the browser console')
 ```
 
 **mongo console**  `meteor mongo`

@@ -37,7 +37,7 @@ if (Meteor.isClient) {
     "submit .new-message": function (event) {
       var text = event.target.text.value;
 
-      Meteor.call('sendMessage', text);
+      Meteor.call("sendMessage", text);
 
       event.target.text.value = "";
       return false;

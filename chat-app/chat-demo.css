@@ -1,8 +1,9 @@
-/* CSS declarations go here */
 body {
   font-family: sans-serif;
   background-color: #315481;
-  background-image: linear-gradient(to bottom, #315481, #918e82 100%);
+  background-image:
+    radial-gradient(ellipse farthest-corner at 0 0, rgba(0,0,0,.2) 0%, rgba(62,45,177, .3) 50%,
+    rgba(255,255,255,.3) 95%), linear-gradient(to bottom, #a7cbf9, #25da8e 100%);
   background-attachment: fixed;
 
   position: absolute;
@@ -14,7 +15,8 @@ body {
   padding: 0;
   margin: 0;
 
-  font-size: 14px;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 .container {
@@ -22,18 +24,19 @@ body {
   margin: 0 auto;
   min-height: 100%;
   background: white;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
 }
 
-header {
-  background: #d2edf4;
-  background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
-  padding: 20px 15px 15px 15px;
-}
+header { flex: 1;  }
+ul     { flex: 999; }
+footer { flex: 1;  }
 
-footer {
+header, footer {
   background: #d2edf4;
-  background-image: linear-gradient(to top, #d0edf5, #e1e5f0 100%);
-  padding: 20px 15px 15px 15px;
+  background-image: linear-gradient(to bottom, #d0edf5, #b4dbff 100%);
+  padding: 1rem;
 }
 
 #login-buttons {
@@ -41,29 +44,22 @@ footer {
 }
 
 h1 {
-  font-size: 1.5em;
+  font-size: 1.5rem;
   margin: 0;
-  margin-bottom: 10px;
-  display: inline-block;
-  margin-right: 1em;
+  text-align: center;
 }
 
 form {
-  margin-top: -10px;
-  margin-bottom: 10px;
-  position: relative;
+  margin: 0;
 }
 
 .new-message input {
   box-sizing: border-box;
-  padding: 8px 5px;
   width: 100%;
-  padding-right: 80px;
-  font-size: 1em;
-}
-
-.new-message input:focus{
-  outline: 0;
+  padding: 1rem;
+  display: block;
+  font-size: 1rem;
+  border: none;
 }
 
 ul {
@@ -75,23 +71,20 @@ ul {
 
 
 li {
-  position: relative;
   list-style: none;
-  padding: 15px;
+  padding: 1rem;
   border-bottom: #eee solid 1px;
-  background-color: transparent; 
-}
-
-li .text {
-  margin-left: 10px;
+  opacity: 0; transform: translateX(-25px);
+  -webkit-animation: slideIn ease .25s;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation: slideIn ease .25s;
+  -moz-animation-fill-mode: forwards;
+  animation: slideIn ease .25s;
+  animation-fill-mode: forwards;
 }
 
 div .username {
   font-weight: bold;
-}
-
-div .message{
-  margin-top: 5px;
 }
 
 @media (max-width: 600px) {
@@ -102,4 +95,17 @@ div .message{
   .new-message input {
     padding-top: 15px;
   }
+}
+
+@-webkit-keyframes slideIn {
+  from { opacity: 0; transform: translateX(-25px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@-moz-keyframes slideIn {
+  from { opacity: 0; transform: translateX(-25px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-25px); }
+  to { opacity: 1; transform: translateX(0); }
 }

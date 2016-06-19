@@ -1,6 +1,6 @@
 # Meteor Introduction: Demo
 
-This is a demo that is included for use in the Meteor introduction from the [Meteor speaker kit](http://speakerkit.meteor.com/). It builds a "complete" chat app and is designed to take 15 minutes. 
+This is a demo that is included for use in the Meteor introduction from the [Meteor speaker kit](https://www.meteor.com/speaker-kit). It builds a "complete" chat app and is designed to take 15 minutes. 
 
 ## Support Materials
 
